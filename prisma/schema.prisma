@@ -1,0 +1,68 @@
+// schema.prisma
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Theme {
+  id        Int      @id @default(autoincrement())
+  name      String
+  createdAt DateTime @default(now())
+
+  // Relation for normal theme images (one-to-many)
+  images Image[] @relation("ThemeImages")
+
+  // Relation for single cover image (one-to-one)
+  coverImage   Image?  @relation("ThemeCoverImage", fields: [coverImageId], references: [id])
+  coverImageId String? @unique
+}
+
+model Image {
+  id String @id @default(cuid())
+
+  // Relation for normal images in a theme
+  theme   Theme? @relation("ThemeImages", fields: [themeId], references: [id])
+  themeId Int?
+
+  // Relation for when the image is the theme’s cover
+  coverForTheme Theme? @relation("ThemeCoverImage")
+
+  fileUrl    String
+  locationId Int? // Add this foreign key
+  location   Location? @relation(fields: [locationId], references: [id])
+  createdAt  DateTime  @default(now())
+}
+
+model Location {
+  id        Int      @id @default(autoincrement())
+  name      String
+  state     String
+  country   String
+  latitude  String
+  longitude String
+  createdAt DateTime @default(now())
+  images    Image[]
+}
+
+model BlogPost {
+  id          Int       @id @default(autoincrement())
+  title       String
+  slug        String    @unique
+  description String?
+  coverImage  String?
+  content     String    // store MDX/Markdown as raw text
+  publishedAt DateTime? // null = draft
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  tags        Tag[]     @relation("PostTags")
+}
+
+model Tag {
+  id    Int        @id @default(autoincrement())
+  name  String     @unique
+  posts BlogPost[] @relation("PostTags")
+}

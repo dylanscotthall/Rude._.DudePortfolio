@@ -1,0 +1,24 @@
+.toggleButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  /* p-3 */
+  border-radius: 9999px;
+  /* rounded-full */
+  background-color: var(--bg-paper);
+  border: 1px solid var(--border-blueprint);
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+.toggleButton:hover {
+  transform: scale(1.1);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+.icon {
+  color: var(--text-primary);
+  transition: color 0.3s ease;
+}

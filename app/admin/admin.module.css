@@ -1,0 +1,285 @@
+.container {
+  padding: 1.5rem;
+  /* p-6 */
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  /* space-y-6 */
+}
+
+.title {
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--text-primary);
+}
+
+.sectionsContainer {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.section {
+  flex: 1;
+  min-width: 300px;
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.input {
+  border: 1px solid var(--border-blueprint);
+  border-radius: 4px;
+  padding: 0.25rem 0.5rem;
+  /* px-2 py-1 */
+  flex: 1;
+}
+
+.button {
+  padding: 0.25rem 0.75rem;
+  /* px-3 py-1 */
+  border-radius: 4px;
+  color: var(--text-primary);
+  border: 1px solid var(--border-blueprint);
+  background-color: var(--bg-paper);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.button:hover {
+  background-color: #e0f0ff;
+  /* or a lighter shade */
+}
+
+.deleteButton:hover {
+  background-color: #ffe0e0;
+  /* red hover for delete */
+}
+
+.select {
+  border: 1px solid var(--border-blueprint);
+  border-radius: 4px;
+  padding: 0.25rem 0.5rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr));
+  gap: 0.75rem;
+}
+
+.gridItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.imageContainer {
+  width: 8rem;
+  height: 8rem;
+  border: 1px solid var(--border-blueprint);
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Optional: make sure the image fills the container nicely */
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* The new "+" button overlay */
+.addButton {
+  position: absolute;
+  bottom: 0.5rem;
+  right: 0.5rem;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 1.75rem;
+  height: 1.75rem;
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.addButton:hover {
+  background: rgba(100, 255, 100, 0.8);
+}
+
+.buttonSmall {
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  color: var(--text-primary);
+  border: 1px solid var(--border-blueprint);
+  background-color: var(--bg-paper);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.75rem;
+}
+
+.coverLabel {
+  margin-top: 0.25rem;
+  font-size: 0.625rem;
+  color: var(--text-primary);
+  /* blue */
+}
+
+.coordinates {
+  margin-top: 0.25rem;
+  font-size: 0.625rem;
+}
+
+.overlayButtons {
+  position: absolute;
+  top: 0.4rem;
+  right: 0.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.iconButton {
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 1.5rem;
+  height: 1.5rem;
+  font-size: 1rem;
+  line-height: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.iconButton:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.removeButton:hover {
+  background: rgba(255, 100, 100, 0.8);
+}
+
+.coverButton:hover {
+  background: rgba(255, 215, 0, 0.8);
+}
+
+.coordButton:hover {
+  background: rgba(255, 255, 150, 0.8);
+}
+
+/* Cover label overlay */
+.coverBadge {
+  position: absolute;
+  bottom: 0.4rem;
+  left: 0.4rem;
+  background: rgba(255, 215, 0, 0.85);
+  color: black;
+  font-weight: bold;
+  font-size: 0.65rem;
+  padding: 0.15rem 0.35rem;
+  border-radius: 4px;
+}
+
+.locationModal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 300px;
+  transform: translate(-50%, -50%);
+  background: #111;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  z-index: 1000;
+}
+
+.closeModalButton {
+  position: absolute;
+  top: 0.25rem;
+  right: 0.25rem;
+  background: transparent;
+  border: none;
+  font-size: 1.25rem;
+  color: white;
+  cursor: pointer;
+}
+
+/* Floating button */
+.floatingCreateBlogButton {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #222;
+  color: white;
+  padding: 12px 20px;
+  font-size: 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+  z-index: 1000;
+}
+
+.floatingCreateBlogButton:hover {
+  opacity: 0.9;
+}
+
+/* Modal overlay */
+.blogModalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+/* Modal box */
+.blogModal {
+  background: #fff;
+  width: 600px;
+  padding: 25px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Big textarea */
+.textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  resize: vertical;
+  font-family: monospace;
+}
+
+/* Modal actions */
+.modalActions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Close button */
+.closeModalButton {
+  background: transparent;
+  color: #333;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+}

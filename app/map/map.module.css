@@ -1,0 +1,123 @@
+.container {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  pointer-events: none;
+  /* disable interactions by default */
+}
+
+.container canvas {
+  pointer-events: auto;
+  /* allow canvas itself to get events */
+}
+
+
+.modal {
+  position: fixed;
+  pointer-events: auto;
+  z-index: 50;
+  background-color: rgba(250, 250, 250, 0.95);
+  color: #0a1f44;
+  padding: 0.5rem 0.75rem;
+  /* 8px 12px */
+  border-radius: 0.375rem;
+  /* 6px */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.modalTitle {
+  font-weight: bold;
+  margin-bottom: 0.25rem;
+}
+
+.pin {
+  cursor: pointer;
+}
+
+.pinSphere {
+  transition: transform 0.3s ease;
+}
+
+.pinSphere:hover {
+  transform: scale(1.5);
+}
+
+.darkBody {
+  background-color: #000;
+  /* optional dark mode fallback */
+}
+
+.coordDisplay {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 0.4rem 0.6rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-family: monospace;
+  z-index: 20;
+}
+
+.sideModal {
+  position: absolute;
+  top: 100px;
+  right: -400px;
+  width: 400px;
+  height: 100vh;
+  background-color: rgba(20, 20, 25, 0.95);
+  padding: 1rem;
+  box-shadow: -4px 0 10px rgba(0, 0, 0, 0.5);
+  overflow-y: auto;
+  transition: right 0.3s ease-in-out;
+  z-index: 1000;
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.show {
+  right: 0;
+}
+
+.sideModalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.closeBtn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.closeBtn:hover {
+  opacity: 0.7;
+}
+
+.imageGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 0.5rem;
+}
+
+.imageItem {
+  width: 100%;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.noImages {
+  color: #bbb;
+  font-style: italic;
+  text-align: center;
+  margin-top: 2rem;
+}

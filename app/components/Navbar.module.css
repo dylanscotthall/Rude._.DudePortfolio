@@ -1,0 +1,74 @@
+.nav {
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border-blueprint);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: rgba(var(--bg-paper-rgb, 255, 255, 255), 0.6);
+  backdrop-filter: blur(3px);
+  flex-wrap: nowrap;
+  gap: 0;
+  /* spacing handled by flex fractions */
+}
+
+/* Logo takes 2/10 */
+.logo {
+  flex: 0 0 20%;
+  /* flex-grow 0, shrink 0, basis 20% */
+  font-size: 1.7rem;
+  font-weight: bold;
+}
+
+/* Links take 7/10 */
+.links {
+  flex: 0 0 70%;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+
+  /* horizontal scrolling */
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  /* smooth scroll when using touch or scrollIntoView */
+
+  /* prevent scrollbar from taking visual space */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+
+.links::-webkit-scrollbar {
+  display: none;
+  /* Chrome, Safari, Opera */
+}
+
+/* Each link style */
+.link {
+  text-decoration: none;
+  transition: color 0.3s ease;
+  white-space: nowrap;
+  /* prevent breaking text */
+}
+
+.link:hover {
+  color: var(--text-accent);
+}
+
+.links .link {
+  flex-shrink: 0;
+}
+
+/* Dark toggle takes 1/10 */
+.darkToggle {
+  flex: 0 0 10%;
+  display: flex;
+  justify-content: flex-end;
+  /* align toggle to far right */
+  align-items: center;
+}

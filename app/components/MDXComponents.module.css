@@ -1,0 +1,65 @@
+.image {
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  margin: 24px 0;
+  width: 100%;
+  height: auto;
+}
+
+.youtubeWrapper {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%;
+  /* 16:9 */
+  margin: 24px 0;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #000;
+}
+
+.youtubeIframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.spotify {
+  width: 100%;
+  height: 80px;
+  border: none;
+  margin: 24px 0;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.proseContainer {
+  max-width: 750px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: system-ui, sans-serif;
+  line-height: 1.65;
+}
+
+/* General MDX styling */
+.proseContainer h1,
+.proseContainer h2,
+.proseContainer h3 {
+  margin-top: 40px;
+  margin-bottom: 16px;
+}
+
+.proseContainer p {
+  margin: 16px 0;
+}
+
+.proseContainer a {
+  color: #0070f3;
+  text-decoration: none;
+}
+
+.proseContainer a:hover {
+  text-decoration: underline;
+}

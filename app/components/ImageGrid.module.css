@@ -1,0 +1,42 @@
+.grid {
+  display: grid;
+  gap: 0;
+  grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+}
+
+.item {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  /* square */
+  transition: transform 0.3s ease-in-out;
+}
+
+.item:hover .nextImage {
+  transform: scale(1.1);
+  z-index: 10;
+  border-radius: 8px;
+  border: 0px solid black;
+}
+
+.cursorPointer {
+  cursor: pointer;
+}
+
+.nextImage {
+  object-fit: cover;
+  transition: transform 0.3s ease-in-out, border-radius 0.3s ease-in-out;
+}
+
+.overlayContainer {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  pointer-events: none;
+}
+
+.group:hover .overlayContainer {
+  opacity: 1;
+}

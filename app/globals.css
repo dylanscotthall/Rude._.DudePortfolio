@@ -1,26 +1,162 @@
-@import "tailwindcss";
-
+/* =========================
+   Blueprint Theme Variables
+========================= */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Backgrounds */
+  --bg-page: #f8f5e7;
+  --bg-paper: rgba(255, 255, 255, 0.6);
+  --bg-grid: rgba(10, 31, 68, 0.1);
+
+  /* Borders */
+  --border-blueprint: rgba(10, 31, 68, 0.5);
+
+  /* Text */
+  --font-main: 'JetBrains Mono', monospace;
+  --text-primary: #0a1f44;
+  --text-accent: #1a3e82;
+
+  /* Dark Mode Overrides */
+  --bg-page-dark: #08132a;
+  --bg-paper-dark: #08132a;
+  --bg-grid-dark: rgba(255, 255, 255, 0.1);
+  --border-blueprint-dark: rgba(242, 209, 107, 0.5);
+  --text-primary-dark: #F2D16B;
+  --bg-paper-rgb: 255, 255, 255;
+  --bg-paper-dark-rgb: 8, 19, 42;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* Override background for map page */
+body.map-page {
+  background-image: none !important;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.dark {
+  --bg-page: var(--bg-page-dark);
+  --bg-paper: var(--bg-paper-dark);
+  --bg-grid: var(--bg-grid-dark);
+  --border-blueprint: var(--border-blueprint-dark);
+  --text-primary: var(--text-primary-dark);
+  --bg-paper-rgb: var(--bg-paper-dark-rgb);
 }
 
+/* make font the same everywhere */
+button,
+input,
+select,
+textarea {
+  font-family: var(--font-main);
+}
+
+/* =========================
+   Global Styles
+========================= */
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--bg-page);
+  color: var(--text-primary);
+  font-family: var(--font-main);
+  position: relative;
+  min-height: 100vh;
+
+  /* Full-page SVG background */
+  background-image: url('/worldLight.svg');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: contain;
+  background-attachment: fixed;
+}
+
+/* Dark mode background SVG */
+.dark body {
+  background-image: url('/world.svg');
+}
+
+/* Blueprint grid overlay */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image:
+    linear-gradient(to right, var(--bg-grid) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--bg-grid) 1px, transparent 1px);
+  background-size: 50px 50px;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 1;
+}
+
+/* Dark mode grid overlay (optional: slightly different grid) */
+.dark body::before {
+  background-image:
+    linear-gradient(to right, var(--bg-grid) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--bg-grid) 1px, transparent 1px);
+}
+
+/* =========================
+   Links
+========================= */
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--text-accent);
+}
+
+/* =========================
+   Blueprint Borders & Containers
+========================= */
+.border-blueprint {
+  border: 1px solid var(--border-blueprint);
+  border-radius: 8px;
+  padding: 1rem;
+  backdrop-filter: blur(6px);
+  background-color: rgba(var(--bg-paper-rgb, 255, 255, 255), 0.6);
+  transition: background-color 0.5s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+.blur-background {
+  backdrop-filter: blur(2px);
+  background-color: rgba(var(--bg-paper-rgb, 255, 255, 255), 0.6);
+  transition: background-color 0.5s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+.border-blueprint input,
+.border-blueprint textarea,
+.border-blueprint button {
+  margin-top: 0.5rem;
+  padding: 0.75rem;
+  border: 1px solid var(--border-blueprint);
+  border-radius: 0.375rem;
+  font-family: var(--font-main);
+  color: var(--text-primary);
+  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(var(--bg-paper-rgb, 255, 255, 255), 0.5);
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.border-blueprint button {
+  cursor: pointer;
+}
+
+/* =========================
+   Blueprint Titles
+========================= */
+.title-blueprint {
+  font-weight: 700;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  transition: color 0.3s ease;
+}
+
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }

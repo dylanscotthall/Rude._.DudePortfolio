@@ -1,0 +1,46 @@
+.container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 3rem 1.25rem;
+}
+
+.main {
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.paperBox {
+  background-color: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(4px);
+  border-radius: 6px;
+  padding: 1.5rem;
+}
+
+:global(.dark) .paperBox {
+  background-color: rgba(8, 19, 42, 0.65);
+}
+
+.section {
+  margin-top: 2rem;
+}
+
+.title {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+}
+
+.coverImage {
+  width: 100%;
+  border-radius: 12px;
+  margin-bottom: 1rem;
+}
+
+.paragraph {
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}

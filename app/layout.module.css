@@ -1,0 +1,20 @@
+.body {
+  background-color: var(--bg-paper);
+  color: var(--text-primary);
+  margin: 0;
+  /* matches your globals.css */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.mapPage {
+  background-image: none !important;
+  /* preserves your previous map-page override */
+}
+
+.main {
+  flex: 1;
+  padding: 70px;
+  /* lets main expand to fill available space */
+}

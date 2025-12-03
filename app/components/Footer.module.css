@@ -1,0 +1,7 @@
+.footer {
+  text-align: center;
+  padding: 1rem;
+  border-top: 1px solid var(--border-blueprint);
+  margin-top: 3rem;
+  /* mt-12 equivalent */
+}
