@@ -58,7 +58,7 @@ body {
   min-height: 100vh;
 
   /* Full-page SVG background */
-  background-image: url('/worldLight.svg');
+  /* background-image: url('/worldLight.svg'); */
   background-repeat: no-repeat;
   background-position: center center;
   background-size: contain;
@@ -67,7 +67,7 @@ body {
 
 /* Dark mode background SVG */
 .dark body {
-  background-image: url('/world.svg');
+  /* background-image: url('/world.svg'); */
 }
 
 /* Blueprint grid overlay */

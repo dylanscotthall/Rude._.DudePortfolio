@@ -103,11 +103,11 @@
 }
 
 .closeBtn:hover {
-  color: white;
+  color: coral;
 }
 
 .modalBody {
-  padding: 1rem;
+  padding: 2rem;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
@@ -126,20 +126,6 @@
 
 .modalBody::-webkit-scrollbar-track {
   background-color: rgba(0, 0, 0, 0.1);
-}
-
-/* ---------- Paper Box ---------- */
-.paperBox {
-  background-color: rgba(var(--bg-paper-rgb, 255, 255, 255), 0.6);
-  backdrop-filter: blur(4px);
-  border-radius: 6px;
-  border: 1px solid var(--border-blueprint);
-  transition: background-color 0.35s ease, border-color 0.25s ease;
-}
-
-:global(.dark) .paperBox {
-  background-color: rgba(var(--bg-paper-dark-rgb, 8, 19, 42), 0.65);
-  border-color: var(--border-blueprint-dark);
 }
 
 .fullImageBackdrop {

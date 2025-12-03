@@ -3,8 +3,13 @@ import React from "react";
 import { JSX } from "react";
 import DarkmodeToggle from "./DarkmodeToggle";
 import styles from "./Navbar.module.css";
+import { ThemeContextType } from "../lib/interfaces";
 
-export default function Navbar(): JSX.Element {
+interface NavbarProps {
+  theme: ThemeContextType;
+}
+
+export default function Navbar({ theme }: NavbarProps): JSX.Element {
   return (
     <nav className={styles.nav + ' blur-background'}>
 
@@ -41,7 +46,7 @@ export default function Navbar(): JSX.Element {
 
       {/* Dark mode toggle */}
       <div className={styles.darkToggle}>
-        <DarkmodeToggle />
+        <DarkmodeToggle theme={theme} />
       </div>
     </nav>
   );

@@ -25,7 +25,7 @@
 
 .nextImage {
   object-fit: cover;
-  transition: transform 0.3s ease-in-out, border-radius 0.3s ease-in-out;
+  transition: transform 0.15s ease-in-out, border-radius 0.15s ease-in-out;
 }
 
 .overlayContainer {

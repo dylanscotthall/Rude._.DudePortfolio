@@ -1,24 +1,43 @@
+.toggleWrapper {
+  position: relative;
+  display: inline-block;
+}
+
 .toggleButton {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.5rem;
-  /* p-3 */
-  border-radius: 9999px;
-  /* rounded-full */
-  background-color: var(--bg-paper);
-  border: 1px solid var(--border-blueprint);
-  transition: all 0.3s ease-in-out;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background: none;
+  border: none;
   cursor: pointer;
 }
 
-.toggleButton:hover {
-  transform: scale(1.1);
-  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+.modal {
+  position: absolute;
+  top: 40px;
+  right: 0;
+  padding: 1rem;
+  z-index: 50;
+  width: 200px;
 }
 
-.icon {
-  color: var(--text-primary);
-  transition: color 0.3s ease;
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.switchWrapper,
+.colorPickerWrapper {
+  margin-top: 0.5rem;
+}
+
+.colorPickerWrapper input[type="color"] {
+  margin-left: 0.5rem;
+  cursor: pointer;
 }

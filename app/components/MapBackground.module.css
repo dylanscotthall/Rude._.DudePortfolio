@@ -1,0 +1,19 @@
+.mapWrapper {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -2;
+  /* behind grid (-1) and everything else */
+  padding-top: 70px;
+  overflow: hidden;
+  pointer-events: none;
+  transform: translateX(-100px);
+  /* so it doesn't block clicks */
+}
+
+.mapSvg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}

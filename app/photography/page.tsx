@@ -79,7 +79,7 @@ export default function Portfolio() {
           {themes.map((theme) => (
             <div
               key={theme.id}
-              className={styles.themeCard + ' ' + styles.paperBox}
+              className={styles.themeCard + ' blur-background'}
               onClick={() => openThemeModal(theme)}
             >
               {themeCovers[theme.id] ? (
@@ -103,80 +103,49 @@ export default function Portfolio() {
         </div>
 
         {/* THEME IMAGE MODAL */}
-        {modalOpen && (
-          <div className={styles.modalBackdrop} onClick={closeModal}>
+        {
+          modalOpen && (
+            <div className={styles.modalBackdrop}>
+              <div
+                className={styles.modalContent + ' border-blueprint'}
+                onClick={(e) => e.stopPropagation()}
+              >
+                <div className={styles.modalHeader}>
+                  <h2>{activeTheme?.name}</h2>
+                  <button className={styles.closeBtn} onClick={closeModal}>
+                    ✕
+                  </button>
+                </div>
+
+                <div className={styles.modalBody}>
+                  <ImageGrid
+                    items={activeImages.map((img) => img.fileUrl)}
+                    onClick={(url, index) => {
+                      setFullImage(url);
+                      setCurrentIndex(index);
+                      setZoom(1);
+                    }}
+                  />
+                </div>
+              </div>
+            </div>
+          )
+        }
+        {
+          fullImage &&
+          <div className={styles.modalBackdrop}>
             <div
-              className={styles.modalContent + ' ' + styles.paperBox}
+              className={styles.modalContent + ' border-blueprint'}
               onClick={(e) => e.stopPropagation()}
             >
               <div className={styles.modalHeader}>
                 <h2>{activeTheme?.name}</h2>
-                <button className={styles.closeBtn} onClick={closeModal}>
+                <button className={styles.closeBtn} onClick={() => { setFullImage(null) }}>
                   ✕
                 </button>
               </div>
 
               <div className={styles.modalBody}>
-                <ImageGrid
-                  items={activeImages.map((img) => img.fileUrl)}
-                  onClick={(url, index) => {
-                    setFullImage(url);
-                    setCurrentIndex(index);
-                    setZoom(1);
-                  }}
-                />
-              </div>
-            </div>
-          </div>
-        )}
-
-
-        {fullImage && (
-          <div
-            className={styles.fullImageBackdrop}
-            onClick={() => setFullImage(null)}
-          >
-            <div
-              className={styles.fullImageContainer}
-              onClick={(e) => e.stopPropagation()} // keep modal clicks from closing
-            >
-              {/* Close and navigation buttons */}
-              <button
-                className={styles.fullImageClose}
-                onClick={() => setFullImage(null)}
-              >
-                ✕
-              </button>
-
-              <button
-                className={styles.fullImagePrev}
-                onClick={() =>
-                  setCurrentIndex(
-                    (i) => (i - 1 + activeImages.length) % activeImages.length
-                  )
-                }
-              >
-                ‹
-              </button>
-
-              <button
-                className={styles.fullImageNext}
-                onClick={() =>
-                  setCurrentIndex((i) => (i + 1) % activeImages.length)
-                }
-              >
-                ›
-              </button>
-
-              {/* Zoomable viewport */}
-              <div
-                className={styles.fullImageViewport}
-                onWheel={(e) => {
-                  e.stopPropagation(); // allow buttons to work
-                  e.preventDefault(); // prevent page scroll
-                  setZoom((z) => Math.max(0.5, Math.min(z + e.deltaY * -0.002, 5)));
-                }}
-              >
                 <div
                   style={{
                     width: "100%",
@@ -203,10 +172,83 @@ export default function Portfolio() {
               </div>
             </div>
           </div>
-        )}
+        }
 
-      </main>
-    </div>
+        {/**/}
+        {/* {fullImage && ( */}
+        {/*   <div */}
+        {/*     className={styles.fullImageBackdrop} */}
+        {/*     onClick={() => setFullImage(null)} */}
+        {/*   > */}
+        {/*     <div */}
+        {/*       className={styles.fullImageContainer} */}
+        {/*       onClick={(e) => e.stopPropagation()} // keep modal clicks from closing */}
+        {/*     > */}
+        {/*       <button */}
+        {/*         className={styles.fullImageClose} */}
+        {/*         onClick={() => setFullImage(null)} */}
+        {/*       > */}
+        {/*         ✕ */}
+        {/*       </button> */}
+        {/**/}
+        {/*       <button */}
+        {/*         className={styles.fullImagePrev} */}
+        {/*         onClick={() => */}
+        {/*           setCurrentIndex( */}
+        {/*             (i) => (i - 1 + activeImages.length) % activeImages.length */}
+        {/*           ) */}
+        {/*         } */}
+        {/*       > */}
+        {/*         ‹ */}
+        {/*       </button> */}
+        {/**/}
+        {/*       <button */}
+        {/*         className={styles.fullImageNext} */}
+        {/*         onClick={() => */}
+        {/*           setCurrentIndex((i) => (i + 1) % activeImages.length) */}
+        {/*         } */}
+        {/*       > */}
+        {/*         › */}
+        {/*       </button> */}
+        {/**/}
+        {/*       <div */}
+        {/*         className={styles.fullImageViewport} */}
+        {/*         onWheel={(e) => { */}
+        {/*           e.stopPropagation(); // allow buttons to work */}
+        {/*           e.preventDefault(); // prevent page scroll */}
+        {/*           setZoom((z) => Math.max(0.5, Math.min(z + e.deltaY * -0.002, 5))); */}
+        {/*         }} */}
+        {/*       > */}
+        {/*         <div */}
+        {/*           style={{ */}
+        {/*             width: "100%", */}
+        {/*             height: "100%", */}
+        {/*             display: "flex", */}
+        {/*             justifyContent: "center", */}
+        {/*             alignItems: "center", */}
+        {/*             pointerEvents: "none", // make sure buttons work above */}
+        {/*           }} */}
+        {/*         > */}
+        {/*           <Image */}
+        {/*             loader={nextcloudLoader} */}
+        {/*             src={activeImages[currentIndex]?.fileUrl || fullImage} */}
+        {/*             alt={fullImage} */}
+        {/*             fill */}
+        {/*             style={{ */}
+        {/*               transform: `scale(${zoom})`, */}
+        {/*               maxWidth: "100%", */}
+        {/*               maxHeight: "100%", */}
+        {/*               objectFit: "contain", */}
+        {/*             }} */}
+        {/*           /> */}
+        {/*         </div> */}
+        {/*       </div> */}
+        {/*     </div> */}
+        {/*   </div> */}
+        {/* )} */}
+
+      </main >
+    </div >
   );
 }
 
