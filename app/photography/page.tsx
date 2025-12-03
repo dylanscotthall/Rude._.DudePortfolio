@@ -14,6 +14,10 @@ export default function Portfolio() {
   const [activeTheme, setActiveTheme] = useState<Theme | null>(null);
   const [activeImages, setActiveImages] = useState<ThemeImage[]>([]);
 
+  const [fullImage, setFullImage] = useState<string | null>(null);
+  const [zoom, setZoom] = useState(1);
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
+
   useEffect(() => {
     const load = async () => {
       const list = await api.fetchThemes();
@@ -55,17 +59,22 @@ export default function Portfolio() {
     setActiveImages([]);
   };
 
+  // ESC closes modals
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') closeModal();
+      if (e.key === 'Escape') {
+        if (fullImage) setFullImage(null);
+        else closeModal();
+      }
     };
     window.addEventListener('keydown', handler);
     return () => window.removeEventListener('keydown', handler);
-  }, []);
+  }, [fullImage]);
 
   return (
     <div className={styles.container}>
       <main className={styles.main}>
+        {/* THEME GRID */}
         <div className={styles.themeGrid}>
           {themes.map((theme) => (
             <div
@@ -93,6 +102,7 @@ export default function Portfolio() {
           ))}
         </div>
 
+        {/* THEME IMAGE MODAL */}
         {modalOpen && (
           <div className={styles.modalBackdrop} onClick={closeModal}>
             <div
@@ -109,11 +119,92 @@ export default function Portfolio() {
               <div className={styles.modalBody}>
                 <ImageGrid
                   items={activeImages.map((img) => img.fileUrl)}
+                  onClick={(url, index) => {
+                    setFullImage(url);
+                    setCurrentIndex(index);
+                    setZoom(1);
+                  }}
                 />
               </div>
             </div>
           </div>
         )}
+
+
+        {fullImage && (
+          <div
+            className={styles.fullImageBackdrop}
+            onClick={() => setFullImage(null)}
+          >
+            <div
+              className={styles.fullImageContainer}
+              onClick={(e) => e.stopPropagation()} // keep modal clicks from closing
+            >
+              {/* Close and navigation buttons */}
+              <button
+                className={styles.fullImageClose}
+                onClick={() => setFullImage(null)}
+              >
+                ✕
+              </button>
+
+              <button
+                className={styles.fullImagePrev}
+                onClick={() =>
+                  setCurrentIndex(
+                    (i) => (i - 1 + activeImages.length) % activeImages.length
+                  )
+                }
+              >
+                ‹
+              </button>
+
+              <button
+                className={styles.fullImageNext}
+                onClick={() =>
+                  setCurrentIndex((i) => (i + 1) % activeImages.length)
+                }
+              >
+                ›
+              </button>
+
+              {/* Zoomable viewport */}
+              <div
+                className={styles.fullImageViewport}
+                onWheel={(e) => {
+                  e.stopPropagation(); // allow buttons to work
+                  e.preventDefault(); // prevent page scroll
+                  setZoom((z) => Math.max(0.5, Math.min(z + e.deltaY * -0.002, 5)));
+                }}
+              >
+                <div
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    pointerEvents: "none", // make sure buttons work above
+                  }}
+                >
+                  <Image
+                    loader={nextcloudLoader}
+                    src={activeImages[currentIndex]?.fileUrl || fullImage}
+                    alt={fullImage}
+                    fill
+                    style={{
+                      transform: `scale(${zoom})`,
+                      maxWidth: "100%",
+                      maxHeight: "100%",
+                      objectFit: "contain",
+                    }}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
       </main>
     </div>
   );

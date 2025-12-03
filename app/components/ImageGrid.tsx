@@ -8,7 +8,7 @@ import nextcloudLoader from "../lib/nextCloudLoader";
 
 interface ImageGridProps {
   items: string[];
-  onClick?: (item: string) => void;
+  onClick?: (item: string, index: number) => void;
   overlay?: (item: string) => JSX.Element;
   useNextImage?: boolean; // default true
 }
@@ -21,11 +21,11 @@ export default function ImageGrid({
 }: ImageGridProps) {
   return (
     <div className={styles.grid}>
-      {items.map((item) => (
+      {items.map((item, index) => (
         <div
           key={item}
           className={`${styles.item} ${onClick ? styles.cursorPointer : ""} group`}
-          onClick={() => onClick?.(item)}
+          onClick={() => onClick?.(item, index)}
         >
           {useNextImage ? (
             <Image
