@@ -9,18 +9,6 @@ import { api, Theme, ThemeImage, ThemeVideo } from "../lib/apiHelper";
 import { usePhotos } from "../hooks/usePhotos";
 import useVideos from "../hooks/useVideos";
 
-/**
- * Admin page - unified images & videos management
- *
- * - Uses your existing `api` for theme/image/video CRUD
- * - Uses `usePhotos` (existing) to list available images from Nextcloud
- * - Uses `useVideos` (new) to list available videos (server-proxied)
- *
- * Notes:
- * - This uses your updated API shape (fetchThemeVideos, addVideoToTheme, etc.)
- * - Styling uses your existing admin.module.css class names
- */
-
 export default function AdminPage() {
   // UI state
   const [themes, setThemes] = useState<Theme[]>([]);
