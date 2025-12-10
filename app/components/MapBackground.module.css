@@ -1,19 +1,38 @@
 .mapWrapper {
   position: fixed;
   inset: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: -2;
-  /* behind grid (-1) and everything else */
-  padding-top: 70px;
-  overflow: hidden;
-  pointer-events: none;
-  transform: translateX(-100px);
-  /* so it doesn't block clicks */
-}
-
-.mapSvg {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: -2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mapWrapper svg {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  display: block;
+  transform-origin: center center;
+  transition: transform 0.3s ease;
+}
+
+/* Mobile / portrait: rotate SVG 90deg and scale to fit screen */
+@media (max-width: 768px) {
+  .mapWrapper svg {
+    transform: rotate(90deg) scale(1.5);
+
+    /* Use both viewport dimensions to scale properly */
+    width: 100vh;
+    /* rotated width = viewport height */
+    height: 100vw;
+    /* rotated height = viewport width */
+
+    max-width: 100vh;
+    max-height: 100vw;
+  }
 }

@@ -29,6 +29,13 @@ export default function AdminPage() {
   const [newLocationLat, setNewLocationLat] = useState("");
   const [newLocationLng, setNewLocationLng] = useState("");
 
+  const [blogModal, setBlogModal] = useState(false);
+  const [blogTitle, setBlogTitle] = useState("");
+  const [blogSlug, setBlogSlug] = useState("");
+  const [blogDescription, setBlogDescription] = useState("");
+  const [blogCoverImage, setBlogCoverImage] = useState("");
+  const [blogContent, setBlogContent] = useState(""); // MDX text
+
   // derived
   const selectedTheme = useMemo(() => themes.find((t) => t.id === selectedThemeId) ?? null, [
     themes,
@@ -252,7 +259,7 @@ export default function AdminPage() {
     <div className={styles.container}>
       <div style={{ display: "flex", justifyContent: "space-between", gap: 16 }}>
         <div>
-          <button className={styles.floatingCreateBlogButton} onClick={() => alert("Blog modal unchanged - keep your implementation")}>
+          <button className={styles.floatingCreateBlogButton} onClick={() => setBlogModal(true)}>
             + Blog Post
           </button>
         </div>
@@ -371,7 +378,77 @@ export default function AdminPage() {
           </div>
         </>
       )}
-    </div>
+      {blogModal && (
+        <div className={styles.blogModalOverlay}>
+          <div className={styles.blogModal}>
+            <h2>Create Blog Post</h2>
+            <input className={styles.input}
+              placeholder="Blog Title"
+              value={blogTitle}
+              onChange={(e) => setBlogTitle(e.target.value)}
+            />
+            <input
+              className={styles.input}
+              placeholder="Slug (my-first-post)"
+              value={blogSlug} onChange={(e) => setBlogSlug(e.target.value)}
+            />
+            <input
+              className={styles.input}
+              placeholder="Description"
+              value={blogDescription}
+              onChange={(e) => setBlogDescription(e.target.value)}
+            />
+            <input
+              className={styles.input}
+              placeholder="Cover image URL (optional)"
+              value={blogCoverImage}
+              onChange={(e) => setBlogCoverImage(e.target.value)}
+            />
+            <textarea
+              className={styles.textarea}
+              rows={12}
+              placeholder="MDX Content"
+              value={blogContent}
+              onChange={(e) => setBlogContent(e.target.value)}
+            />
+            <div className={styles.modalActions}>
+              <button
+                className={styles.button}
+                onClick={async () => {
+                  try {
+                    await api.createBlogPost({
+                      title: blogTitle,
+                      slug: blogSlug,
+                      description: blogDescription,
+                      coverImage: blogCoverImage,
+                      content: blogContent,
+                    });
+                    alert("Blog post created!");
+                    setBlogModal(false);
+                    // reset form
+                    setBlogTitle("");
+                    setBlogSlug("");
+                    setBlogDescription("");
+                    setBlogCoverImage("");
+                    setBlogContent("");
+                  } catch (e) {
+                    console.error(e);
+                    alert("Failed to create blog post");
+                  }
+                }}
+              > Publish
+              </button>
+              <button
+                className={styles.closeModalButton}
+                onClick={() => setBlogModal(false)}
+              > ×
+              </button>
+            </div>
+          </div>
+        </div>
+      )
+      }
+    </div >
   );
 }
 

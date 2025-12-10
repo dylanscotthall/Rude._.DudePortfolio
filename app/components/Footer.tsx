@@ -1,4 +1,3 @@
-// components/Footer.tsx
 import { JSX } from "react";
 import styles from "./Footer.module.css";
 

@@ -1,7 +1,6 @@
 import styles from "./MapBackground.module.css"
 
 export default function MapBackground({ fillColor = "#1c2742", strokeColor = "#000" }) {
-  console.log(fillColor);
   return (
     <div className={styles.mapWrapper}>
       <svg

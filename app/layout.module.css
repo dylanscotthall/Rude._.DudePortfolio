@@ -2,19 +2,28 @@
   background-color: var(--bg-paper);
   color: var(--text-primary);
   margin: 0;
-  /* matches your globals.css */
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-}
-
-.mapPage {
-  background-image: none !important;
-  /* preserves your previous map-page override */
+  font-family: var(--font-main);
 }
 
 .main {
   flex: 1;
-  padding: 70px;
-  /* lets main expand to fill available space */
+  padding: 2rem;
+  /* mobile-first padding */
+}
+
+@media (min-width: 768px) {
+  .main {
+    padding: 3rem 4rem;
+    /* tablet */
+  }
+}
+
+@media (min-width: 1200px) {
+  .main {
+    padding: 70px;
+    /* desktop */
+  }
 }

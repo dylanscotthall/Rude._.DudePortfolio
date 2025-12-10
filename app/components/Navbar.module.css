@@ -11,64 +11,80 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   background-color: rgba(var(--bg-paper-rgb, 255, 255, 255), 0.6);
   backdrop-filter: blur(3px);
-  flex-wrap: nowrap;
-  gap: 0;
-  /* spacing handled by flex fractions */
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
-/* Logo takes 2/10 */
+/* Logo */
 .logo {
-  flex: 0 0 20%;
-  /* flex-grow 0, shrink 0, basis 20% */
-  font-size: 1.7rem;
+  flex: 2;
+  font-size: clamp(1.2rem, 4vw, 1.7rem);
   font-weight: bold;
+  min-width: 120px;
 }
 
-/* Links take 7/10 */
+/* Desktop links */
 .links {
-  flex: 0 0 70%;
   display: flex;
+  flex: 8;
   justify-content: space-between;
-  gap: 1rem;
-
-  /* horizontal scrolling */
-  overflow-x: auto;
-  scroll-behavior: smooth;
-  /* smooth scroll when using touch or scrollIntoView */
-
-  /* prevent scrollbar from taking visual space */
-  -ms-overflow-style: none;
-  /* IE and Edge */
-  scrollbar-width: none;
-  /* Firefox */
+  gap: 0.5rem;
 }
 
-.links::-webkit-scrollbar {
-  display: none;
-  /* Chrome, Safari, Opera */
-}
-
-/* Each link style */
 .link {
   text-decoration: none;
-  transition: color 0.3s ease;
   white-space: nowrap;
-  /* prevent breaking text */
+  font-size: clamp(0.9rem, 2.5vw, 1rem);
+  transition: color 0.3s ease;
+  flex: 1;
+  text-align: center;
 }
 
 .link:hover {
   color: var(--text-accent);
 }
 
-.links .link {
-  flex-shrink: 0;
+/* Hamburger button (mobile) */
+.hamburger {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  flex: 1;
 }
 
-/* Dark toggle takes 1/10 */
-.darkToggle {
-  flex: 0 0 10%;
+/* Mobile menu */
+.mobileMenu {
+  position: absolute;
+  top: 100%;
+  right: 1rem;
+  background-color: var(--bg-paper);
+  border: 1px solid var(--border-blueprint);
   display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem;
+  z-index: 999;
+}
+
+/* Dark toggle */
+.darkToggle {
+  display: flex;
+  flex: 1;
   justify-content: flex-end;
-  /* align toggle to far right */
   align-items: center;
+  flex-shrink: 0;
+  margin-left: 0.5rem;
+}
+
+/* Responsive: hide desktop links and show hamburger */
+@media (max-width: 768px) {
+  .links {
+    display: none;
+  }
+
+  .hamburger {
+    display: block;
+  }
 }
